@@ -115,7 +115,7 @@ alias gw=./gradlew
 
 function installProgramsAndTools()
 {
-  installBrew
+	installBrew
   installBrewCask
 
   brewCaskInstall iterm2
@@ -126,6 +126,7 @@ function installProgramsAndTools()
   brewInstall tree
   brewInstall wget
 	brewInstall docker
+	brewInstall dockutil
 
   configureAndInstallAtom
 }
@@ -141,6 +142,25 @@ function createWorkspace() {
 	mkdir -p ~/workspace
 }
 
+function setupDock() {
+	defaults write com.apple.dock autohide-time-modifier -float 1; killall Dock
+
+	dockutil --remove Mail
+	dockutil --remove Contacts
+	dockutil --remove Calendar
+	dockutil --remove Notes
+	dockutil --remove Reminders
+	dockutil --remove Maps
+	dockutil --remove Photos
+	dockutil --remove Messages
+	dockutil --remove FaceTime
+	dockutil --remove iTunes
+	dockutil --remove iBooks
+
+	dockutil --add "/Applications/IntelliJ IDEA CE.app"
+	dockutil --add /Applications/iTerm.app
+}
+
 installProgramsAndTools
 createBashProfile
 
@@ -148,4 +168,6 @@ createWorkspace
 
 configureGit
 
-openApps
+#openApps
+
+setupDock
