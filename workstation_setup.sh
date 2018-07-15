@@ -161,6 +161,16 @@ function setupDock() {
 	dockutil --add /Applications/iTerm.app
 }
 
+function configureIterm2(){
+  brewInstall "zsh zsh-completions"
+
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+	# Load colors and font into iterm2
+	curl -O https://raw.githubusercontent.com/MartinSeeler/iterm2-material-design/master/material-design-colors.itermcolors
+
+	git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+}
+
 installProgramsAndTools
 createBashProfile
 
