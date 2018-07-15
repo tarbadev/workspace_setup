@@ -54,6 +54,8 @@ function configureGit()
 
   git config --global user.name "Tony Batard"
   git config --global user.email "tbatard@pivotal.io"
+
+	git config --global core.editor "atom --wait"
 }
 
 # $1 is the package name
@@ -99,18 +101,9 @@ function configureAndInstallAtom()
 	installAtomPackage toggle-quotes
 }
 
-function createBashProfile()
+function copyUserZshrc()
 {
-	echo "Creating ~/.bash_profile"
-	content="
-alias cp='cp -iv'
-alias mv='mv -iv'
-alias mkdir='mkdir -pv'
-alias ll='ls -FGlAhp'
-alias less='less -FSRXc'
-alias gw=./gradlew
-"
-	echo "$content" > ~/.bash_profile
+	cp .zshrc ~/
 }
 
 function installProgramsAndTools()
@@ -162,22 +155,23 @@ function setupDock() {
 }
 
 function configureIterm2(){
-  brewInstall "zsh zsh-completions"
+  brewInstall "zsh zsh-completions zsh-syntax-highlighting"
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-	# Load colors and font into iterm2
-	curl -O https://raw.githubusercontent.com/MartinSeeler/iterm2-material-design/master/material-design-colors.itermcolors
 
-	git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+	git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
+	git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 }
 
 installProgramsAndTools
-createBashProfile
+
+configureIterm2
+copyUserZshrc
 
 createWorkspace
 
 configureGit
 
-#openApps
-
 setupDock
+
+#openApps
