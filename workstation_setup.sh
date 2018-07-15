@@ -121,6 +121,9 @@ function installProgramsAndTools()
 	brewInstall docker
 	brewInstall dockutil
 
+	brew tap cloudfoundry/tap
+	brewInstall cf-cli
+
   configureAndInstallAtom
 }
 
@@ -159,8 +162,13 @@ function configureIterm2(){
 
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-	git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
-	git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+	ZSH_CUSTOM=~/.oh-my-zsh/custom/
+	if [ ! -d "$ZSH_CUSTOM/themes/powerlevel9k" ]; then
+		git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
+	fi
+	if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+		https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+	fi
 }
 
 installProgramsAndTools
