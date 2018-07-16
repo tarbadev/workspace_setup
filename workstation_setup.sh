@@ -114,6 +114,7 @@ function installProgramsAndTools()
   brewCaskInstall iterm2
   brewCaskInstall shiftit
   brewCaskInstall flycut
+  brewCaskInstall "caskroom/versions/java8"
   brewCaskInstall "caskroom/cask/intellij-idea-ce"
 
   brewInstall tree
