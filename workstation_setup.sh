@@ -4,10 +4,9 @@ set +x
 
 function installBrew()
 {
-	which -s brew
-	if [[ $? != 0 ]] ; then
+	if ! hash brew 2>/dev/null; then
 		echo "Installing brew"
-		/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	else
 		echo "Updating brew"
 		brew update
@@ -115,7 +114,7 @@ function installProgramsAndTools()
   brewCaskInstall shiftit
   brewCaskInstall flycut
   brewCaskInstall "caskroom/versions/java8"
-  brewCaskInstall "caskroom/cask/intellij-idea-ce"
+  brewCaskInstall "caskroom/cask/intellij-idea"
 
   brewInstall tree
   brewInstall wget
@@ -154,7 +153,7 @@ function setupDock() {
 	dockutil --remove iTunes
 	dockutil --remove iBooks
 
-	dockutil --add "/Applications/IntelliJ IDEA CE.app"
+	dockutil --add "/Applications/IntelliJ IDEA.app"
 	dockutil --add /Applications/iTerm.app
 }
 
@@ -168,19 +167,19 @@ function configureIterm2(){
 		git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
 	fi
 	if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-		https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+		git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 	fi
 }
 
-installProgramsAndTools
+# installProgramsAndTools
 
-configureIterm2
+# configureIterm2
 copyUserZshrc
 
-createWorkspace
+# createWorkspace
 
-configureGit
+# configureGit
 
-setupDock
+# setupDock
 
 #openApps
