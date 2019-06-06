@@ -82,6 +82,8 @@ function installProgramsAndTools()
     brewCaskInstall flycut
     brewCaskInstall sublime-text
     brewCaskInstall "caskroom/cask/intellij-idea"
+    brew tap caskroom/versions
+    brewCaskInstall java
 
     brewInstall tree
     brewInstall wget
@@ -136,6 +138,9 @@ function configureIterm2(){
 	fi
 	if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
 		git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
+	fi
+	if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]]; then
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting
 	fi
 }
 
