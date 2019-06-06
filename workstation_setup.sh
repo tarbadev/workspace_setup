@@ -46,15 +46,15 @@ function brewInstall()
 function configureGit()
 {
 	echo "Configuring git"
-  git config --global alias.co checkout
-  git config --global alias.br branch
-  git config --global alias.ci commit
-  git config --global alias.st status
+    git config --global alias.co checkout
+    git config --global alias.br branch
+    git config --global alias.ci commit
+    git config --global alias.st status
 
-  git config --global user.name "Tony Batard"
-  git config --global user.email "tbatard@pivotal.io"
+    git config --global user.name "Tony Batard"
+    git config --global user.email "tbatard@pivotal.io"
 
-	git config --global core.editor "atom --wait"
+    git config --global core.editor "subl -w"
 }
 
 # $1 is the package name
@@ -73,22 +73,22 @@ function copyUserZshrc()
 
 function installProgramsAndTools()
 {
-	installBrew
-  installBrewCask
+    installBrew
+    installBrewCask
 
-  brewCaskInstall iterm2
-  brewCaskInstall shiftit
-  brewCaskInstall flycut
-brew cask install sublime-text
-  brewCaskInstall "caskroom/cask/intellij-idea"
+    brewCaskInstall google-chrome
+    brewCaskInstall iterm2
+    brewCaskInstall shiftit
+    brewCaskInstall flycut
+    brewCaskInstall sublime-text
+    brewCaskInstall "caskroom/cask/intellij-idea"
 
-  brewInstall tree
-  brewInstall wget
-	brewInstall docker
-	brewInstall dockutil
-
-	brew tap cloudfoundry/tap
-	brewInstall cf-cli
+    brewInstall tree
+    brewInstall wget
+    brewInstall docker
+    brewInstall dockutil
+    brew tap cloudfoundry/tap
+    brewInstall cf-cli
 }
 
 function openApps()
@@ -118,6 +118,8 @@ function setupDock() {
 	dockutil --remove iBooks
 	dockutil --remove News
 	dockutil --remove Pages
+	dockutil --remove Numbers
+	dockutil --remove Keynote
 
 	dockutil --add "/Applications/IntelliJ IDEA.app"
 	dockutil --add /Applications/iTerm.app
