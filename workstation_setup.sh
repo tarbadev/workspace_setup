@@ -66,40 +66,6 @@ function installAtomPackage() {
 	fi
 }
 
-function configureAndInstallAtom()
-{
-  brewCaskInstall atom
-	echo "Configuring atom"
-	installAtomPackage Sublime-Style-Column-Selection
-	installAtomPackage atom-beautify
-	installAtomPackage atom-ternjs
-	installAtomPackage atom-transpose
-	installAtomPackage atom-wrap-in-tag
-	installAtomPackage autoclose-html
-	installAtomPackage autocomplete-modules
-	installAtomPackage busy-signal
-	installAtomPackage change-case
-	installAtomPackage color-picker
-	installAtomPackage copy-path
-	installAtomPackage duplicate-line-or-selection
-	installAtomPackage file-icons
-	installAtomPackage highlight-selected
-	installAtomPackage hyperclick
-	installAtomPackage intentions
-	installAtomPackage js-hyperclick
-	installAtomPackage language-babel
-	installAtomPackage linter
-	installAtomPackage linter-ui-default
-	installAtomPackage local-history
-	installAtomPackage pigments
-	installAtomPackage prettier-atom
-	installAtomPackage project-manager
-	installAtomPackage related
-	installAtomPackage sort-lines
-	installAtomPackage tab-foldername-index
-	installAtomPackage toggle-quotes
-}
-
 function copyUserZshrc()
 {
 	cp .zshrc ~/
@@ -113,7 +79,7 @@ function installProgramsAndTools()
   brewCaskInstall iterm2
   brewCaskInstall shiftit
   brewCaskInstall flycut
-  brewCaskInstall "caskroom/versions/java8"
+brew cask install sublime-text
   brewCaskInstall "caskroom/cask/intellij-idea"
 
   brewInstall tree
@@ -123,15 +89,13 @@ function installProgramsAndTools()
 
 	brew tap cloudfoundry/tap
 	brewInstall cf-cli
-
-  configureAndInstallAtom
 }
 
 function openApps()
 {
 	open -a ShiftIt
 	open -a Flycut
-	open -a "IntelliJ IDEA CE"
+	open -a "IntelliJ IDEA"
 }
 
 function createWorkspace() {
@@ -152,6 +116,8 @@ function setupDock() {
 	dockutil --remove FaceTime
 	dockutil --remove iTunes
 	dockutil --remove iBooks
+	dockutil --remove News
+	dockutil --remove Pages
 
 	dockutil --add "/Applications/IntelliJ IDEA.app"
 	dockutil --add /Applications/iTerm.app
@@ -163,23 +129,23 @@ function configureIterm2(){
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 	ZSH_CUSTOM=~/.oh-my-zsh/custom/
-	if [ ! -d "$ZSH_CUSTOM/themes/powerlevel9k" ]; then
-		git clone https://github.com/bhilburn/powerlevel9k.git $ZSH_CUSTOM/themes/powerlevel9k
+	if [[ ! -d "$ZSH_CUSTOM/themes/powerlevel9k" ]]; then
+		git clone https://github.com/bhilburn/powerlevel9k.git ${ZSH_CUSTOM}/themes/powerlevel9k
 	fi
-	if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-		git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+	if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]]; then
+		git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions
 	fi
 }
 
-# installProgramsAndTools
+installProgramsAndTools
 
-# configureIterm2
+configureIterm2
 copyUserZshrc
 
-# createWorkspace
+createWorkspace
 
-# configureGit
+configureGit
 
-# setupDock
+setupDock
 
-#openApps
+openApps
